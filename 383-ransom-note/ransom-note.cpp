@@ -1,21 +1,17 @@
 class Solution {
 public:
     bool canConstruct(string ransomNote, string magazine) {
-        unordered_map<char, int> f;
-
-        //store key value pair of magazine
-        for (int i = 0; i < magazine.size(); i++) {
-            f[magazine[i]]++;
+        unordered_map<char,int> mp;
+        int n=magazine.size();
+        for(int i=0;i<n;i++){
+            mp[magazine[i]]++;
         }
-        for (int i = 0; i < ransomNote.size(); i++) {
-            if (f[ransomNote[i]] == 0) {
+        for(int i=0;i<ransomNote.size();i++){
+            if(mp[ransomNote[i]]==0){
                 return false;
-            } 
-                f[ransomNote[i]]--;
-            
-           
+            }else{
+                mp[ransomNote[i]]--;            }
         }
-        return true; 
-        
+        return true;
     }
 };
