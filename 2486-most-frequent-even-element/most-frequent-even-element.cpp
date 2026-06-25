@@ -10,15 +10,12 @@ public:
             }
         }
         int mx=INT_MIN;
-        for(int x:nums){
-            if(x%2==0){
-            int val=mp[x];
-            if(val>mx){
-                ans=x;
-                mx=val;
-            }else if(val==mx && x<ans){
-                ans=x;
-            }
+        for(auto it:mp){
+            if(it.second>mx){
+                mx=it.second;
+                ans=it.first;
+            }else if(it.second==mx && it.first<ans){
+                ans=it.first;
             }
         }
         return ans;
