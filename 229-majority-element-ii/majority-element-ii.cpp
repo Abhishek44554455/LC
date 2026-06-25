@@ -1,43 +1,48 @@
 class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
-        
         int n=nums.size();
-        int mx=INT_MIN;
-        int ans=0;
-        vector<int>result;
-        unordered_map<int,int>mp;
+        int count1=0;
+        int maj1=NULL;
+        int count2=0;
+        int maj2=NULL;
         for(int i=0;i<n;i++){
-            mp[nums[i]]++;
-        }
-        for(auto x:nums){
-            if(mp[x]>(n/3)){
-                
-                result.push_back(x);
-                // mx=mp[x];
-
+            if(nums[i]==maj1){
+                count1++;
             }
-           
-           
-        }
-        sort(result.begin(),result.end());
-        if(result.empty()){
-    return {};
-}
-        vector<int> sol;
-        sol.push_back(result[0]);
-        for(int i=1;i<result.size();i++){
-           
-             if(result[i]==result[i-1]){
-                continue;
-            }
-            sol.push_back(result[i]);
-        }
-        //  result.push_back(ans);
-          return sol;
-        
-     
-    
+            else if(nums[i]==maj2){
+                count2++;
+            }else if(count1==0){
+                maj1=nums[i];
+                count1++;
 
+            }else if(count2==0){
+                maj2=nums[i];
+                count2++;
+            }else{
+                count1--;
+                count2--;
+            }
+        }
+        //verification
+        int freq1=0;
+        int freq2=0;
+
+        for(int num:nums){
+            if(num==maj1){
+                freq1++;
+            }else if(num==maj2){
+                freq2++;
+            }
+        }
+        vector<int>result;
+
+        if(freq1>floor(n/3)){
+            result.push_back(maj1);
+        }
+        if(freq2>floor(n/3)){
+            result.push_back(maj2);
+        }
+        return result;
     }
 };
