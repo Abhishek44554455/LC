@@ -1,15 +1,15 @@
 class Solution {
 public:
     bool checkIfPangram(string s) {
-        unordered_map<char,int>mp;
+        vector<int>hash(26,0);
         int n=s.size();
         for(int i=0;i<n;i++){
-            mp[s[i]]++;
+            char ch=s[i];
+            hash[ch-'a']++;
         }
-        for(char ch='a';ch<='z';ch++){
-            if(mp[ch]==0){
+        for(int i=0;i<26;i++){
+            if(hash[i]==0){
                 return false;
-                break;
             }
         }
         return true;
