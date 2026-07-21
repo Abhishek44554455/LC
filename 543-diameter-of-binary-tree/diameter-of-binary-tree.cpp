@@ -19,12 +19,11 @@ public:
         return 1+max(level(root->left),level(root->right));
     }
     int diameterOfBinaryTree(TreeNode* root) {
-       if(root==NULL)return 0;
+        if(root==NULL) return 0;
         int dia=level(root->left)+level(root->right);
         maxDia=max(maxDia,dia);
         diameterOfBinaryTree(root->left);
         diameterOfBinaryTree(root->right);
         return maxDia;
-
     }
 };
