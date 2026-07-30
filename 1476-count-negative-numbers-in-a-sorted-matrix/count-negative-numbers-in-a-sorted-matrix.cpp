@@ -1,15 +1,12 @@
 class Solution {
 public:
-    int countNegatives(vector<vector<int>>& mat) {
-        int m=mat.size();
+    int countNegatives(vector<vector<int>>& grid) {
+        int m=grid.size();
+        int n=grid[0].size();
         int count=0;
-        int n=mat[0].size();
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-                if(mat[i][j]<0){
-                    count++;
-                }
-            }
+        for(auto &row:grid){
+            int idx=upper_bound(begin(row),end(row),0,greater<int>())-row.begin();
+            count+=(n-idx);
         }
         return count;
     }
