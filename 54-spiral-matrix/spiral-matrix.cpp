@@ -4,56 +4,46 @@ public:
         int m=matrix.size();
         int n=matrix[0].size();
         int top=0;
+        int left=0;
         int down=m-1;
         int right=n-1;
-        int left=0;
-
         int dir=0;
-        /* 
-        dir=0 left to right
-        dir=1 top to bottom
-        dir=2 right to left
-        dir=3 bottom to top
-         */
-
-        vector<int>result;
-
+        vector<int>ans;
+        vector<vector<int>>result;
         while(top<=down && left<=right){
-
             if(dir==0){
                 for(int i=left;i<=right;i++){
-                    result.push_back(matrix[top][i]);
+                    ans.push_back(matrix[top][i]);
                 }
+                result.push_back(ans);
                 top++;
             }
-
             if(dir==1){
                 for(int i=top;i<=down;i++){
-                    result.push_back(matrix[i][right]);
+                    ans.push_back(matrix[i][right]);
                 }
+                result.push_back(ans);
                 right--;
-            }
-            if(dir==2){
+            }if(dir==2){
                 for(int i=right;i>=left;i--){
-                    result.push_back(matrix[down][i]);
+                    ans.push_back(matrix[down][i]);
                 }
+                result.push_back(ans);
                 down--;
             }
             if(dir==3){
                 for(int i=down;i>=top;i--){
-                    result.push_back(matrix[i][left]);
+                    ans.push_back(matrix[i][left]);
                 }
+                result.push_back(ans);
                 left++;
             }
-
             dir++;
             if(dir==4){
                 dir=0;
             }
             
-
         }
-        return result;
-
+        return ans;
     }
 };
