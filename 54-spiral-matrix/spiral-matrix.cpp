@@ -4,8 +4,8 @@ public:
         int m=matrix.size();
         int n=matrix[0].size();
         int top=0;
-        int left=0;
         int down=m-1;
+        int left=0;
         int right=n-1;
         int dir=0;
         vector<int>ans;
@@ -15,34 +15,28 @@ public:
                 for(int i=left;i<=right;i++){
                     ans.push_back(matrix[top][i]);
                 }
-                result.push_back(ans);
                 top++;
-            }
-            if(dir==1){
+            }if(dir==1){
                 for(int i=top;i<=down;i++){
                     ans.push_back(matrix[i][right]);
                 }
-                result.push_back(ans);
                 right--;
-            }if(dir==2){
+            }
+            if(dir==2){
                 for(int i=right;i>=left;i--){
                     ans.push_back(matrix[down][i]);
                 }
-                result.push_back(ans);
                 down--;
-            }
-            if(dir==3){
+            }if(dir==3){
                 for(int i=down;i>=top;i--){
                     ans.push_back(matrix[i][left]);
                 }
-                result.push_back(ans);
                 left++;
             }
             dir++;
             if(dir==4){
                 dir=0;
             }
-            
         }
         return ans;
     }
