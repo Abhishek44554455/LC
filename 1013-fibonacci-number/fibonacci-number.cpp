@@ -14,7 +14,7 @@ public:
         if(dp[n]!=-1){
             return dp[n];
         }
-        dp[n]=solveRec(n-1)+solveRec(n-2);
+        dp[n]=solveMem(n-1,dp)+solveMem(n-2,dp);
         return dp[n];
     }
     int fib(int n) {
