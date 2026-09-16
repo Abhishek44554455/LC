@@ -29,6 +29,20 @@ public:
         }
         return dp[n];
     }
+    int solveSpace(int n){
+        //  vector<int>dp(n+2,0);
+        if(n==0) return 0;
+        int prev2=0;
+        int prev=1;
+        int curr=0;
+        for(int i=2;i<=n;i++){
+             curr=prev+prev2;
+            prev2=prev;
+            prev=curr;
+            
+        }
+        return prev;
+    }
     int fib(int n) {
     
     // return solveRec(n); 
@@ -39,6 +53,8 @@ public:
     // vector<int>dp(n+1,-1);
     // return solveMem(n,dp);
     //Method-2->Tabulation
-    return solveTab(n);
+    // return solveTab(n);
+    // Method-3->Space Optimisation
+    return  solveSpace(n);
     }
 };
