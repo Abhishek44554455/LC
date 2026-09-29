@@ -10,6 +10,6 @@ public:
                 arr[index++]=arr[i];
             }
         }
-        return s.size();
+        return index;
     }
 };
