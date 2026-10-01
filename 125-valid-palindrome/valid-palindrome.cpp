@@ -1,27 +1,19 @@
 class Solution {
 public:
     bool isPalindrome(string s) {
-        int start = 0;
-        int end = s.size() - 1;
-        for (char& x : s) {
-            x = tolower(x);
+        string clean="";
+        for(char ch:s){
+            if(isalnum(ch)){
+                clean+=tolower(ch);
+            }
         }
-        
-        while (start < end) {
-            if (!(isalnum(s[start]))) {
-                start++;
-                continue;
-            }
-            if (!(isalnum(s[end]))) {
-                end--;
-                continue;
-            }
-            if (s[start] != s[end]) {
+        int i=0;
+        int j=clean.size()-1;
+        while(i<j){
+            if(clean[i]!=clean[j]){
                 return false;
-            } else {
-                start++;
-                end--;
             }
+            i++,j--;
         }
         return true;
     }
