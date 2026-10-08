@@ -1,12 +1,12 @@
 class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
+        vector<int>result;
         int n=nums.size();
-        int maj1=NULL;
+        int maj1=0;
         int count1=0;
-        int maj2=NULL;
+        int maj2=0;
         int count2=0;
-        vector<int> result;
         for(int i=0;i<n;i++){
             if(nums[i]==maj1){
                 count1++;
@@ -19,16 +19,16 @@ public:
                 maj2=nums[i];
                 count2++;
             }else{
-                count1--,count2--;
+                count1--;
+                count2--;
             }
         }
-        //verififcation
         int freq1=0;
         int freq2=0;
-        for(int num:nums){
-            if(num==maj1){
+        for(int x:nums){
+            if(x==maj1){
                 freq1++;
-            }else if(num==maj2){
+            }else if(x==maj2){
                 freq2++;
             }
         }
@@ -39,5 +39,6 @@ public:
             result.push_back(maj2);
         }
         return result;
+
     }
 };
