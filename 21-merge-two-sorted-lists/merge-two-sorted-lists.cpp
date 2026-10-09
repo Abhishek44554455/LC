@@ -10,52 +10,28 @@
  */
 class Solution {
 public:
-    ListNode* mergeTwoLists(ListNode* a , ListNode* b) {
-        // ListNode* tempA=a;
-        // ListNode* tempB=b;
-        // ListNode* c=new ListNode(100);
-        // ListNode* temp=c;
-        // while(tempA!=NULL && tempB!=NULL){
-        //     if(tempA->val<=tempB->val){
-        //         ListNode* t=new ListNode(tempA->val);
-        //         temp->next=t;
-        //         temp=temp->next;
-        //         tempA=tempA->next;
-        //     }else{
-        //         ListNode* t=new ListNode(tempB->val);
-        //         temp->next=t;
-        //         temp=temp->next;
-        //         tempB=tempB->next;
-        //     }
-        // } 
-        // if(tempA==NULL){
-        //     temp->next=tempB;
-        // }else{
-        //     temp->next=tempA;
-        // }
-        // return c->next;
-        ListNode* tempA=a;
-        ListNode* tempB=b;
-        ListNode* c=new ListNode(100);
-        ListNode* temp=c;
-        while(tempA!=NULL && tempB!=NULL){
-            if(tempA->val<=tempB->val){
-                // ListNode* t=new ListNode(tempA->val);
-                temp->next=tempA;
-                temp=temp->next;
-                tempA=tempA->next;
+    ListNode* mergeTwoLists(ListNode* a, ListNode* b) {
+        ListNode* newHead = new ListNode(0);
+        ListNode* c=newHead;
+        while (a != NULL && b != NULL) {
+            if(a->val<b->val){
+                ListNode* temp=new ListNode(a->val);
+                c->next=temp;
+                c=c->next;
+                a=a->next;
             }else{
-                // ListNode* t=new ListNode(tempB->val);
-                temp->next=tempB;
-                temp=temp->next;
-                tempB=tempB->next;
+                ListNode* temp=new ListNode(b->val);
+                c->next=temp;
+                c=c->next;
+                b=b->next;
             }
-        } 
-        if(tempA==NULL){
-            temp->next=tempB;
-        }else{
-            temp->next=tempA;
         }
-        return c->next;
+        if(a==NULL){
+            c->next=b;
+        }
+        if(b==NULL){
+            c->next=a;
+        }
+        return newHead->next;
     }
 };
