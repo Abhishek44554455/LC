@@ -10,44 +10,32 @@
  */
 class Solution {
 public:
-    ListNode* merge(ListNode* a, ListNode* b) {
-        ListNode* tempA = a;
-        ListNode* tempB = b;
-        ListNode* c = new ListNode(100);
-        ListNode* temp = c;
-        while (tempA != NULL && tempB != NULL) {
-            if (tempA->val <= tempB->val) {
-                // ListNode* t=new ListNode(tempA->val);
-                temp->next = tempA;
-                temp = temp->next;
-                tempA = tempA->next;
-            } else {
-                // ListNode* t=new ListNode(tempB->val);
-                temp->next = tempB;
-                temp = temp->next;
-                tempB = tempB->next;
-            }
+    ListNode* mergeTwo(ListNode* a,ListNode* b){
+        if(!a) return b;
+        if(!b) return a;
+        if(a->val<=b->val){
+            a->next=mergeTwo(a->next,b);
+            return a;
+        }else{
+            b->next=mergeTwo(a,b->next);
+            return b;
         }
-        if (tempA == NULL) {
-            temp->next = tempB;
-        } else {
-            temp->next = tempA;
-        }
-        return c->next;
+        return NULL;
     }
-
-    ListNode* mergeKLists(vector<ListNode*>& arr) {
-
-        if (arr.size() == 0)
+    ListNode* partitionAndMerge(int start,int end,vector<ListNode*>& lists){
+        if(start>end){
             return NULL;
-        while (arr.size() > 1) {
-            ListNode* a = arr[0];
-            arr.erase(arr.begin());
-            ListNode* b = arr[0];
-            arr.erase(arr.begin());
-            ListNode* c=merge(a,b);
-            arr.push_back(c);
         }
-        return arr[0];
+        if(start==end){
+            return lists[start];
+        }
+        int mid=start+(end-start)/2;
+        ListNode* l1=partitionAndMerge(start,mid,lists);
+        ListNode* l2=partitionAndMerge(mid+1,end,lists);
+        return mergeTwo(l1,l2);
+    }
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        int n=lists.size();
+        return partitionAndMerge(0,n-1,lists);
     }
 };
