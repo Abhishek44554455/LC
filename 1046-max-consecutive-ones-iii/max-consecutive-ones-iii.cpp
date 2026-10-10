@@ -14,7 +14,6 @@ public:
                     flip++;
                     j++;
                 }else{
-                    //remove element;
                     if(nums[i]==0){
                         i++;
                         flip--;
@@ -23,7 +22,7 @@ public:
                     }
                 }
             }
-        ans=max(ans,j-i);
+            ans=max(ans,j-i);
         }
         return ans;
     }
