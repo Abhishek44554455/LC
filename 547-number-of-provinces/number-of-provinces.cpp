@@ -1,33 +1,40 @@
 class Solution {
 public:
-    void dfs(int node,vector<bool>&vis,vector<vector<int>>graph){
-        vis[node]=1;
-        for(auto it:graph[node]){
-            if(!vis[it]){
-                dfs(it,vis,graph);
-            }
-        }
-    }
-    int findCircleNum(vector<vector<int>>& adj) {
-        int n=adj.size();
-        // change the matrix to list
-        vector<vector<int>>graph(n);
-        for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
-                if(adj[i][j]==1 && i!=j){
-                    graph[i].push_back(j);
+    void bfs(vector<vector<int>> adjList, vector<bool>& vis, int i) {
+        queue<int> q;
+        q.push(i);
+        vis[i] = 1;
+        while (!q.empty()) {
+            int node = q.front();
+            q.pop();
+            for (auto it : adjList[node]) {
+                if(!vis[it]){
+                    vis[it]=1;
+                    q.push(it);
                 }
             }
         }
-        vector<bool>vis(n,0);
-        int count=0;
-        for(int i=0;i<n;i++){
-            if(!vis[i]){
+    }
+    int findCircleNum(vector<vector<int>>& adjMat) {
+        int n = adjMat.size();
+        vector<vector<int>> adjList(n);
+        // change the adjacency Matrix into adjacency List
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (adjMat[i][j] == 1 && i != j ){
+                        adjList[i].push_back(j);
+                        // adjList[j].push_back(i);
+                    }
+            }
+        }
+        vector<bool> vis(n, 0);
+        int count = 0;
+        for (int i = 0; i < n; i++) {
+            if (!vis[i]) {
                 count++;
-                dfs(i,vis,graph);
+                bfs(adjList, vis, i);
             }
         }
         return count;
-        
     }
 };
