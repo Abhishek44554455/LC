@@ -6,39 +6,31 @@
  *     TreeNode *right;
  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left),
- * right(right) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
 class Solution {
 public:
-    typedef unsigned long long ll;
     int widthOfBinaryTree(TreeNode* root) {
-        vector<int> ans;
-        ll res=0;
-        queue<pair<TreeNode*,ll>>q;
-        if (root == NULL) {
-            return 0;
-        }
-        
+        if(root==NULL) return 0;
+        unsigned long long res=0;
+        queue<pair<TreeNode*,unsigned long long >>q;
         q.push({root,0});
-        while (!q.empty()) {
-            int count = q.size();
-            ll first=q.front().second;
-            ll last=q.back().second;
+        while(!q.empty()){
+            int n=q.size();
+            unsigned long long first=q.front().second;
+            unsigned long long last=q.back().second;
             res=max(res,last-first+1);
-            for (int i = 0; i < count; i++) {
-                auto[temp,index] = q.front();
+            for(int i=0;i<n;i++){
+                auto[curr,index]=q.front();
                 q.pop();
-                // ans.push_back(temp->val);
-                if (temp->left != NULL) {
-                    q.push({temp->left,2*index+1});
+                if(curr->left){
+                    q.push({curr->left,2*index+1});
                 }
-                if (temp->right != NULL) {
-                    q.push({temp->right,2*index+2});
+                if(curr->right){
+                    q.push({curr->right,2*index+2});
                 }
             }
-            // result.push_back(ans);
         }
         return res;
     }
