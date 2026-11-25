@@ -4,12 +4,11 @@ public:
     int maxi=INT_MIN;
     int solve(TreeNode* root){
         if(root==NULL) return 0;
-        int left=max(0,solve(root->left));
-        int right=max(0,solve(root->right));
-        //contribution of current node
-        maxi=max(maxi,left+root->val+right);
-        //contribution of the parent
-        return root->val+max(left,right);
+        int leftGain=max(0,solve(root->left));
+        int rightGain=max(0,solve(root->right));
+        int currentGain=root->val+leftGain+rightGain;
+        maxi=max(maxi,currentGain);
+        return root->val+max(leftGain,rightGain);
     }
     int maxPathSum(TreeNode* root) {
         solve(root);
