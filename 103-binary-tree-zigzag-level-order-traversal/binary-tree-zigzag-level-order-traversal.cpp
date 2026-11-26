@@ -12,18 +12,18 @@ public:
             int n=q.size();
             vector<int>level;
             for(int i=0;i<n;i++){
-                TreeNode* curr=q.front();
+                TreeNode* node=q.front();
                 q.pop();
                 if(reverse){
-                    st.push(curr);
+                    st.push(node);
                 }else{
-                    level.push_back(curr->val);
+                level.push_back(node->val);
                 }
-                if(curr->left){
-                    q.push(curr->left);
+                if(node->left){
+                    q.push(node->left);
                 }
-                if(curr->right){
-                    q.push(curr->right);
+                if(node->right){
+                    q.push(node->right);
                 }
             }
             if(reverse){
@@ -36,7 +36,5 @@ public:
             ans.push_back(level);
         }
         return ans;
-
-
     }
 };
